@@ -10,5 +10,43 @@
     <h2>Welcome to my DevOps journey!</h2>
     <h1>Update Devops Project (Auto Deploy Test)</h1>
     <p>This is a simple static site deployed using Docker and CI/CD.</p>
+
+    <form id="leadForm">
+        <h2>Book a Private Jet</h2>
+    
+        <input type="text" id="name" placeholder="Your Name" required><br><br>
+        <input type="email" id="email" placeholder="Your Email" required><br><br>
+    
+        <button type="submit">Submit</button>
+    </form>
+    
+    <p id="responseMsg"></p>
+
+    <script>
+        document.getElementById("leadForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            const response = await fetch("http://localhost:5000/lead", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email })
+            });
+
+            const data = await response.json();
+
+            document.getElementById("responseMsg").innerText = data.message;
+        });
+    </script>
+
+
+
+
+
 </body>
 </html>
+
