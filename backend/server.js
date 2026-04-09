@@ -25,20 +25,15 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-app.post("/lead", async (req, res) => {
-  const data = req.body;
+app.post("/submit", (req, res) => {
+    const { name, email } = req.body;
 
-  const newLead = new Lead(data);
-  await newLead.save();
+    console.log("Received:", name, email);
 
-  console.log("Saved Lead:", data);
-
-  res.json({
-    message: "Lead saved successfully",
-    data
-  });
+    res.json({
+        message: "Form submitted successfully ✅"
+    });
 });
-
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
